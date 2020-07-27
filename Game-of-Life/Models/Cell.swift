@@ -9,5 +9,8 @@
 import Foundation
 
 struct Cell {
-    let alive: Bool
+    var alive: Bool = false
+    var generation: Int = 0
+    let x: Int
+    let y: Int
 }

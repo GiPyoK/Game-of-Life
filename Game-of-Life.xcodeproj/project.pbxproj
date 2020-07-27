@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A68C08F624CF757C00C4B04D /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68C08F524CF757C00C4B04D /* CellViewModel.swift */; };
 		A6BACDFB24CF3AE10036D151 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BACDFA24CF3AE10036D151 /* AppDelegate.swift */; };
 		A6BACDFD24CF3AE10036D151 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BACDFC24CF3AE10036D151 /* SceneDelegate.swift */; };
 		A6BACDFF24CF3AE10036D151 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BACDFE24CF3AE10036D151 /* ContentView.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A68C08F524CF757C00C4B04D /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		A6BACDF724CF3AE10036D151 /* Game-of-Life.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Game-of-Life.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BACDFA24CF3AE10036D151 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6BACDFC24CF3AE10036D151 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				A6BACE0524CF3AE20036D151 /* LaunchScreen.storyboard */,
 				A6BACE0824CF3AE20036D151 /* Info.plist */,
 				A6BACE0224CF3AE20036D151 /* Preview Content */,
+				A68C08F524CF757C00C4B04D /* CellViewModel.swift */,
 			);
 			path = "Game-of-Life";
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A68C08F624CF757C00C4B04D /* CellViewModel.swift in Sources */,
 				A6BACDFB24CF3AE10036D151 /* AppDelegate.swift in Sources */,
 				A6BACE0F24CF3D300036D151 /* Cell.swift in Sources */,
 				A6BACDFD24CF3AE10036D151 /* SceneDelegate.swift in Sources */,
