@@ -23,8 +23,14 @@ class CellViewModel: ObservableObject {
     
     var columns = [GridItem]()
     
-    init(grid: Int = 20) {
+    init(grid: Int = 5) {
         drawSquareGrid(grid: grid)
+    }
+    
+    func toggleCell(cell: Cell) {
+        if cell.id >= 0 && cell.id < cells.count {
+            cells[cell.id].alive.toggle()
+        }
     }
     
     func drawSquareGrid(grid: Int) {
