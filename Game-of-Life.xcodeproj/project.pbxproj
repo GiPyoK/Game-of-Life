@@ -41,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A68C08F724CF92CB00C4B04D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A68C08F524CF757C00C4B04D /* CellViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		A6BACDEE24CF3AE10036D151 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +68,7 @@
 		A6BACDF924CF3AE10036D151 /* Game-of-Life */ = {
 			isa = PBXGroup;
 			children = (
+				A68C08F724CF92CB00C4B04D /* ViewModels */,
 				A6BACE1024CF3D340036D151 /* Models */,
 				A6BACDFA24CF3AE10036D151 /* AppDelegate.swift */,
 				A6BACDFC24CF3AE10036D151 /* SceneDelegate.swift */,
@@ -68,7 +77,6 @@
 				A6BACE0524CF3AE20036D151 /* LaunchScreen.storyboard */,
 				A6BACE0824CF3AE20036D151 /* Info.plist */,
 				A6BACE0224CF3AE20036D151 /* Preview Content */,
-				A68C08F524CF757C00C4B04D /* CellViewModel.swift */,
 			);
 			path = "Game-of-Life";
 			sourceTree = "<group>";
