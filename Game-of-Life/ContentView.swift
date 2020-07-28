@@ -15,27 +15,29 @@ struct ContentView: View {
     @State var grid: Int = 20
     
     var body: some View {
+        GeometryReader { geometry in
         VStack {
             
             Heading()
             
             HStack {
                 Text("Construct a square grid:")
-                TextField("grid", value: $grid, formatter: NumberFormatter()) {
+                TextField("grid x grid", value: $grid, formatter: NumberFormatter()) {
                     cellVM.drawSquareGrid(grid: grid)
                 }
             }.padding()
             
-            ScrollView {
-                LazyVGrid(columns: cellVM.columns, spacing: 2) {
-                    ForEach(cellVM.cells, id: \.id) { cell in
-                        Rectangle()
-                            .frame(width: 10, height: 10)
-                            .foregroundColor(cell.alive ? Color.green : Color.red)
-                    }
-                }
-            }
             
+            LazyVGrid(columns: cellVM.columns, spacing: 1) {
+                let cellWidth = (geometry.size.width / CGFloat(Double(grid)/2.0)) / 2.0
+                ForEach(cellVM.cells, id: \.id) { cell in
+                    Rectangle()
+                        .frame(width: cellWidth, height: cellWidth, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(cell.alive ? Color.green : Color.red)
+                }
+            }.frame(width: geometry.size.width,
+                    height: geometry.size.width)
+        }
         }
         
     }

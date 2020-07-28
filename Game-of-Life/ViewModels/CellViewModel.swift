@@ -30,9 +30,9 @@ class CellViewModel: ObservableObject {
     func drawSquareGrid(grid: Int) {
         self.grid = grid
         var id = 0
-        for _ in 0...grid {
+        for _ in 0..<grid {
             columns.append(GridItem(.flexible()))
-            for _ in 0...grid {
+            for _ in 0..<grid {
                 cells.append(Cell(id: id))
                 id += 1
             }
