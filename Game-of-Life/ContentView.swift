@@ -12,7 +12,7 @@ struct ContentView: View {
     
     @ObservedObject var cellVM = CellViewModel()
     
-    @State var grid: Int = 20
+    @State var grid: Int = 5
     
     var body: some View {
         GeometryReader { geometry in
@@ -34,6 +34,10 @@ struct ContentView: View {
                     Rectangle()
                         .frame(width: cellWidth, height: cellWidth, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .foregroundColor(cell.alive ? Color.green : Color.red)
+                        .gesture(TapGesture(count: 1)
+                                    .onEnded { _ in
+                                        cellVM.toggleCell(cell: cell)
+                                    })
                 }
             }.frame(width: geometry.size.width,
                     height: geometry.size.width)
