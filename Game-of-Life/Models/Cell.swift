@@ -7,10 +7,15 @@
 //
 
 import Foundation
+import SwiftUI
 
-struct Cell {
+struct Cell: Hashable {
+    var id: Int
     var alive: Bool = false
     var generation: Int = 0
-    let x: Int
-    let y: Int
+    
+    
+    static func == (lhs: Cell, rhs: Cell) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
