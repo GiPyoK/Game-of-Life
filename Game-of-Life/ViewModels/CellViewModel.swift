@@ -23,7 +23,7 @@ class CellViewModel: ObservableObject {
     
     var columns = [GridItem]()
     
-    init(grid: Int = 10) {
+    init(grid: Int = 20) {
         drawSquareGrid(grid: grid)
     }
     
@@ -167,19 +167,23 @@ extension CellViewModel {
             setNumOfNeighbors(cell: cell)
         }
         
+        // Copy cells
+        let liveCells = getLiveCells()
+        let deadCells = getDeadNeightborCells()
+        
         // Any live cell with fewer than two live neighbours dies, as if by underpopulation.
         // Any live cell with more than three live neighbours dies, as if by overpopulation.
-        for willDieCell in getLiveCells().filter({ $0.neighbors < 2 || $0.neighbors > 3 }) {
+        for willDieCell in liveCells.filter({ $0.neighbors < 2 || $0.neighbors > 3 }) {
             killCell(id: willDieCell.id)
         }
         
         // Any live cell with two or three live neighbours lives on to the next generation.
-        for willLiveCell in getLiveCells().filter({ $0.neighbors == 2 || $0.neighbors == 3 }) {
+        for willLiveCell in liveCells.filter({ $0.neighbors == 2 || $0.neighbors == 3 }) {
             liveNextGenCell(id: willLiveCell.id)
         }
         
         // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-        for deadCell in getDeadNeightborCells() {
+        for deadCell in deadCells {
             if deadCell.neighbors == 3 {
                 resurrectCell(id: deadCell.id)
             }

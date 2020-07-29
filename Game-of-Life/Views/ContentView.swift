@@ -12,7 +12,7 @@ struct ContentView: View {
     
     @ObservedObject var cellVM = CellViewModel()
     
-    @State var grid: Int = 10
+    @State var grid: Int = 20
     
     var body: some View {
         GeometryReader { geometry in
