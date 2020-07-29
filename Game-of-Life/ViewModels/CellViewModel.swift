@@ -23,7 +23,7 @@ class CellViewModel: ObservableObject {
     
     var columns = [GridItem]()
     
-    init(grid: Int = 20) {
+    init(grid: Int = 21) {
         drawSquareGrid(grid: grid)
     }
     
@@ -34,7 +34,11 @@ class CellViewModel: ObservableObject {
     }
     
     func drawSquareGrid(grid: Int) {
+        // re-initialize the grid, cells and columns
         self.grid = grid
+        cells = [Cell]()
+        columns = [GridItem]()
+        
         var id = 0
         for _ in 0..<grid {
             columns.append(GridItem(.flexible()))
