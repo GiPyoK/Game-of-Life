@@ -49,6 +49,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		A68C08F824D1494F00C4B04D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A6BACDFE24CF3AE10036D151 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A6BACDEE24CF3AE10036D151 = {
 			isa = PBXGroup;
 			children = (
@@ -70,9 +78,9 @@
 			children = (
 				A68C08F724CF92CB00C4B04D /* ViewModels */,
 				A6BACE1024CF3D340036D151 /* Models */,
+				A68C08F824D1494F00C4B04D /* Views */,
 				A6BACDFA24CF3AE10036D151 /* AppDelegate.swift */,
 				A6BACDFC24CF3AE10036D151 /* SceneDelegate.swift */,
-				A6BACDFE24CF3AE10036D151 /* ContentView.swift */,
 				A6BACE0024CF3AE20036D151 /* Assets.xcassets */,
 				A6BACE0524CF3AE20036D151 /* LaunchScreen.storyboard */,
 				A6BACE0824CF3AE20036D151 /* Info.plist */,

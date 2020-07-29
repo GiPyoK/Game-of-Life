@@ -12,7 +12,7 @@ struct ContentView: View {
     
     @ObservedObject var cellVM = CellViewModel()
     
-    @State var grid: Int = 5
+    @State var grid: Int = 10
     
     var body: some View {
         GeometryReader { geometry in
@@ -41,6 +41,20 @@ struct ContentView: View {
                 }
             }.frame(width: geometry.size.width,
                     height: geometry.size.width)
+            
+            HStack {
+                Button(action: {
+                    cellVM.main()
+                }, label: {
+                    Text("Play")
+                })
+                
+                Button(action: {
+                    cellVM.reset()
+                }, label: {
+                    Text("Reset")
+                })
+            }
         }
         }
         
