@@ -53,7 +53,7 @@ class CellViewModel: ObservableObject {
         
         var id = 0
         for _ in 0..<grid {
-            columns.append(GridItem(.flexible()))
+            columns.append(GridItem(.adaptive(minimum: 40)))
             for _ in 0..<grid {
                 cells.append(Cell(id: id))
                 id += 1

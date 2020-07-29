@@ -23,12 +23,12 @@ struct ContentView: View {
             
             HStack {
                 Text("Grid: \(Int(grid)) x \(Int(grid))")
-                Slider(value: $grid, in: 5...21, step: 1) { _ in
+                Slider(value: $grid, in: 5...30, step: 1) { _ in
                     cellVM.drawSquareGrid(grid: Int(grid))
                 }
             }.padding()
             
-            ScrollView{
+            
                 LazyVGrid(columns: cellVM.columns, spacing: 1) {
                     let cellWidth = (geometry.size.width / CGFloat(Double(grid)/2.0)) / 2.0
                     ForEach(cellVM.cells, id: \.id) { cell in
@@ -40,9 +40,9 @@ struct ContentView: View {
                                             cellVM.toggleCell(cell: cell)
                                         })
                     }
-                }
-            }.frame(width: geometry.size.width,
-                    height: geometry.size.width)
+                }.frame(width: geometry.size.width,
+                        height: geometry.size.width)
+            
             
             HStack {
                 Text(String(format: "Update generation every %.2f seconds", gameSpeed))
