@@ -12,7 +12,8 @@ struct ContentView: View {
     
     @ObservedObject var cellVM = CellViewModel()
     
-    @State var grid: Float = 21
+    @State var grid: Float = 10
+    @State var gameSpeed: Double = 1
     
     var body: some View {
         GeometryReader { geometry in
@@ -44,8 +45,15 @@ struct ContentView: View {
                     height: geometry.size.width)
             
             HStack {
+                Text(String(format: "Update generation every %.2f seconds", gameSpeed))
+                Slider(value: $gameSpeed, in: 0.01...2, step: 0.01) { _ in
+                    cellVM.updateLoopSpeed(speed: gameSpeed)
+                }
+            }
+            
+            HStack {
                 Button(action: {
-                    cellVM.main()
+                    cellVM.togglePlay()
                 }, label: {
                     Text("Play")
                 })

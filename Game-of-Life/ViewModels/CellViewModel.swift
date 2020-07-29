@@ -11,9 +11,12 @@ import SwiftUI
 
 class CellViewModel: ObservableObject {
     @Published var cells = [Cell]()
+    @Published var gameSpeed: Double = 1
+    var columns = [GridItem]()
+    var isPlaying: Bool = false
+    var mainTimer: Timer?
     
     private var grid: Int?
-    
     private var NEIGHBORS: [Int] {
         guard let grid = grid else { return [] }
         return [ -grid-1, -grid, -grid+1,
@@ -21,10 +24,19 @@ class CellViewModel: ObservableObject {
                  grid-1,  grid, grid+1 ]
     }
     
-    var columns = [GridItem]()
-    
-    init(grid: Int = 21) {
+    init(grid: Int = 10) {
         drawSquareGrid(grid: grid)
+    }
+    
+    func updateLoopSpeed(speed: Double) {
+        if speed > 0 {
+            gameSpeed = speed
+        }
+    }
+    
+    func togglePlay() {
+        isPlaying.toggle()
+        Play()
     }
     
     func toggleCell(cell: Cell) {
@@ -201,5 +213,17 @@ extension CellViewModel {
             cells[cell.id].generation = 0
             cells[cell.id].neighbors = 0
         }
+    }
+    
+    private func Play() {
+        
+        if isPlaying{
+            mainTimer = Timer.scheduledTimer(withTimeInterval: gameSpeed, repeats: true) { _ in
+                self.main()
+            }
+        } else {
+            mainTimer?.invalidate()
+        }
+            
     }
 }
