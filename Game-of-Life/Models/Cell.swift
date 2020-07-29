@@ -12,6 +12,7 @@ import SwiftUI
 struct Cell: Hashable {
     var id: Int
     var alive: Bool = false
+    var neighbors: Int = 0
     var generation: Int = 0
     
     
