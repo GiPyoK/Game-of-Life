@@ -16,14 +16,14 @@ class CellViewModel: ObservableObject {
     
     private var NEIGHBORS: [Int] {
         guard let grid = grid else { return [] }
-        return [ -grid-1, -1, grid-1,
-                 -grid,       grid,
-                 -grid+1,  1, grid+1 ]
+        return [ -grid-1, -grid, -grid+1,
+                 -1, 1,
+                 grid-1,  grid, grid+1 ]
     }
     
     var columns = [GridItem]()
     
-    init(grid: Int = 5) {
+    init(grid: Int = 10) {
         drawSquareGrid(grid: grid)
     }
     
@@ -46,9 +46,41 @@ class CellViewModel: ObservableObject {
     }
     
     func setNumOfNeighbors(cell: Cell) {
+        guard let grid = grid else { return }
+        let id = cell.id
+        var edgeNeighbors = NEIGHBORS
+        
+        // Check for the edges of the grid
+        // Top of the Grid
+        if (0 ..< grid).contains(id) {
+            edgeNeighbors[0] = 0
+            edgeNeighbors[1] = 0
+            edgeNeighbors[2] = 0
+        }
+        // Bottom of the Grid
+        else if ((grid*grid - grid) ..< (grid*grid)).contains(id) {
+            edgeNeighbors[5] = 0
+            edgeNeighbors[6] = 0
+            edgeNeighbors[7] = 0
+        }
+        // Left of the Grid
+        if id == 0 || id%grid == 0 {
+            edgeNeighbors[0] = 0
+            edgeNeighbors[3] = 0
+            edgeNeighbors[5] = 0
+        }
+        // Right of the Grid
+        else if (id + 1)%grid == 0 {
+            edgeNeighbors[2] = 0
+            edgeNeighbors[4] = 0
+            edgeNeighbors[7] = 0
+        }
+        // remove 0's
+        edgeNeighbors.removeAll { $0 == 0 }
+        
         var neighbors = 0
-        for neighbor in NEIGHBORS {
-            if isAlive(id: cell.id + neighbor) {
+        for neighbor in edgeNeighbors {
+            if isAlive(id: id + neighbor) {
                 neighbors += 1
             }
         }
@@ -89,6 +121,7 @@ class CellViewModel: ObservableObject {
         guard let grid = grid else { return }
         
         if id >= 0 && id < (grid*grid) {
+            cells[id].alive = true
             cells[id].generation += 1
         }
     }
@@ -102,45 +135,63 @@ class CellViewModel: ObservableObject {
             cells[id].neighbors = 0
         }
     }
+    
+    private func getLiveCells() -> [Cell] {
+        return cells.filter() { $0.alive == true }
+    }
+    
+    private func getDeadNeightborCells() -> [Cell] {
+        var deadNeighborsArr: [Cell] = []
+        
+        for liveCell in getLiveCells() {
+            for neighbor in NEIGHBORS {
+                if isDead(id: liveCell.id + neighbor) {
+                    deadNeighborsArr.append(cells[liveCell.id + neighbor])
+                }
+            }
+        }
+        return Array(Set(deadNeighborsArr))
+    }
 }
 
 // Main Game Logic
 extension CellViewModel {
     func main() {
-        // get live cells
-        let liveCells = cells.filter() { $0.alive == true }
-        var deadNeighborCells: [Cell] {
-            var deadNeighborsArr: [Cell] = []
-            
-            for liveCell in liveCells {
-                for neighbor in NEIGHBORS {
-                    if isDead(id: liveCell.id + neighbor) {
-                        deadNeighborsArr.append(cells[liveCell.id + neighbor])
-                    }
-                }
-            }
-            return Array(Set(deadNeighborsArr))
+        // calculate the neighbors of live cells
+        for cell in getLiveCells() {
+            setNumOfNeighbors(cell: cell)
         }
-        // calculate the number of neighbors
-        for cell in liveCells {
+        
+        // calculate the neighbors of dead cells
+        for cell in getDeadNeightborCells() {
             setNumOfNeighbors(cell: cell)
         }
         
         // Any live cell with fewer than two live neighbours dies, as if by underpopulation.
         // Any live cell with more than three live neighbours dies, as if by overpopulation.
-        for willDieCell in liveCells.filter({ $0.neighbors < 2 || $0.neighbors > 3 }) {
+        for willDieCell in getLiveCells().filter({ $0.neighbors < 2 || $0.neighbors > 3 }) {
             killCell(id: willDieCell.id)
         }
         
         // Any live cell with two or three live neighbours lives on to the next generation.
-        for willLiveCell in liveCells.filter({ $0.neighbors == 2 || $0.neighbors == 3 }) {
+        for willLiveCell in getLiveCells().filter({ $0.neighbors == 2 || $0.neighbors == 3 }) {
             liveNextGenCell(id: willLiveCell.id)
         }
         
         // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-        for willLiveCell in deadNeighborCells {
-            resurrectCell(id: willLiveCell.id)
+        for deadCell in getDeadNeightborCells() {
+            if deadCell.neighbors == 3 {
+                resurrectCell(id: deadCell.id)
+            }
         }
         
+    }
+    
+    func reset() {
+        for cell in cells {
+            cells[cell.id].alive = false
+            cells[cell.id].generation = 0
+            cells[cell.id].neighbors = 0
+        }
     }
 }
