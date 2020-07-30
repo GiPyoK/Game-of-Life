@@ -44,7 +44,7 @@ class CellViewModel: ObservableObject {
         play()
         for cell in cells {
             cells[cell.id].alive = false
-            cells[cell.id].generation = 0
+            cells[cell.id].age = 0
             cells[cell.id].neighbors = 0
         }
     }
@@ -138,7 +138,7 @@ class CellViewModel: ObservableObject {
         
         if id >= 0 && id < (grid*grid) {
             cells[id].alive = false
-            cells[id].generation = 0
+            cells[id].age = 0
             cells[id].neighbors = 0
         }
     }
@@ -148,7 +148,7 @@ class CellViewModel: ObservableObject {
         
         if id >= 0 && id < (grid*grid) {
             cells[id].alive = true
-            cells[id].generation += 1
+            cells[id].age += 1
         }
     }
     
@@ -157,7 +157,7 @@ class CellViewModel: ObservableObject {
         
         if id >= 0 && id < (grid*grid) {
             cells[id].alive = true
-            cells[id].generation = 0
+            cells[id].age = 0
             cells[id].neighbors = 0
         }
     }
