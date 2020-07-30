@@ -24,7 +24,7 @@ struct ContentView: View {
             // Grid slider
             HStack {
                 Text("Grid: \(Int(grid)) x \(Int(grid))")
-                Slider(value: $grid, in: 5...30, step: 1) { _ in
+                Slider(value: $grid, in: 5...40, step: 1) { _ in
                     cellVM.drawSquareGrid(grid: Int(grid))
                 }
                 .allowsHitTesting(!cellVM.isPlaying)
@@ -36,7 +36,7 @@ struct ContentView: View {
                 ForEach(cellVM.cells, id: \.id) { cell in
                     Rectangle()
                         .frame(width: cellWidth, height: cellWidth, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .foregroundColor(cell.alive ? Color.green : Color.red)
+                        .foregroundColor(cell.alive ? Color.black : Color.gray)
                         .gesture(TapGesture(count: 1)
                                     .onEnded { _ in
                                         cellVM.toggleCell(cell: cell)
@@ -56,21 +56,39 @@ struct ContentView: View {
             }.padding()
             
             // Play buttons
-            HStack {
-                Button(action: {
-                    cellVM.togglePlay()
-                }) {
-                    Image(systemName: !cellVM.isPlaying ? "play.circle.fill" : "pause.circle.fill")
-                        .font(.title)
-                }
-                
-                Button(action: {
-                    cellVM.reset()
-                }) {
-                    Image(systemName: "stop.circle.fill")
-                        .font(.title)
-                }
-            }.padding()
+            VStack{
+                // Presets
+                HStack {
+                    Button(action: {
+                        cellVM.makeGosperGliderGun()
+                        grid = Float(cellVM.grid!)
+                    }, label: {
+                        Text("Gosper Glider Gun")
+                    })
+                    Text("-")
+                    Button(action: {
+                        cellVM.randomCell()
+                    }, label: {
+                        Text("Random")
+                    })
+                }.allowsHitTesting(!cellVM.isPlaying)
+                // Play, Stop buttons
+                HStack {
+                    Button(action: {
+                        cellVM.togglePlay()
+                    }) {
+                        Image(systemName: !cellVM.isPlaying ? "play.circle.fill" : "pause.circle.fill")
+                            .font(.title)
+                    }
+                    
+                    Button(action: {
+                        cellVM.reset()
+                    }) {
+                        Image(systemName: "stop.circle.fill")
+                            .font(.title)
+                    }
+                }.padding()
+            }
         }
         }
         

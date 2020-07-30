@@ -15,8 +15,8 @@ class CellViewModel: ObservableObject {
     @Published var isPlaying: Bool = false
     var columns = [GridItem]()
     var mainTimer: Timer?
+    var grid: Int?
     
-    private var grid: Int?
     private var NEIGHBORS: [Int] {
         guard let grid = grid else { return [] }
         return [ -grid-1, -grid, -grid+1,
@@ -36,7 +36,17 @@ class CellViewModel: ObservableObject {
     
     func togglePlay() {
         isPlaying.toggle()
-        Play()
+        play()
+    }
+    
+    func reset() {
+        isPlaying = false
+        play()
+        for cell in cells {
+            cells[cell.id].alive = false
+            cells[cell.id].generation = 0
+            cells[cell.id].neighbors = 0
+        }
     }
     
     func toggleCell(cell: Cell) {
@@ -207,16 +217,7 @@ extension CellViewModel {
         
     }
     
-    func reset() {
-        isPlaying = false
-        for cell in cells {
-            cells[cell.id].alive = false
-            cells[cell.id].generation = 0
-            cells[cell.id].neighbors = 0
-        }
-    }
-    
-    private func Play() {
+    private func play() {
         
         if isPlaying{
             mainTimer = Timer.scheduledTimer(withTimeInterval: gameSpeed, repeats: true) { _ in
@@ -226,5 +227,41 @@ extension CellViewModel {
             mainTimer?.invalidate()
         }
             
+    }
+}
+
+// Presets
+extension CellViewModel {
+    func makeGosperGliderGun() {
+        let grid = 40
+        var activeCells = [
+            24+(grid),
+            22+(grid*2), 24+(grid*2),
+            12+(grid*3), 13+(grid*3), 20+(grid*3), 21+(grid*3), 34+(grid*3), 35+(grid*3),
+            11+(grid*4), 15+(grid*4), 20+(grid*4), 21+(grid*4), 34+(grid*4), 35+(grid*4),
+            0+(grid*5), 1+(grid*5), 10+(grid*5), 16+(grid*5), 20+(grid*5), 21+(grid*5),
+            0+(grid*6), 1+(grid*6), 10+(grid*6), 14+(grid*6), 16+(grid*6), 17+(grid*6), 22+(grid*6), 24+(grid*6),
+            10+(grid*7), 16+(grid*7), 24+(grid*7),
+            11+(grid*8), 15+(grid*8),
+            12+(grid*9), 13+(grid*9)
+        ]
+        
+        drawSquareGrid(grid: grid)
+        isPlaying = false
+        
+        for i in 0..<activeCells.count {
+            activeCells[i] += 1
+        }
+        
+        for cellID in activeCells {
+            cells[cellID].alive = true
+        }
+    }
+    
+    func randomCell() {
+        reset()
+        for i in 0..<cells.count {
+            cells[i].alive = Bool.random()
+        }
     }
 }
