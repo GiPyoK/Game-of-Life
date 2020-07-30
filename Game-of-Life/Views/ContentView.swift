@@ -20,6 +20,7 @@ struct ContentView: View {
             GeometryReader { geometry in
                 VStack {
                     Heading()
+                        .allowsHitTesting(!cellVM.isPlaying)
                     
                     // Grid slider
                     HStack {
@@ -54,6 +55,8 @@ struct ContentView: View {
                     // Game speed slider
                     HStack {
                         Text(String(format: "Update generation every %.2f seconds", gameSpeed))
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.5)
                         Slider(value: $gameSpeed, in: 0.01...2, step: 0.01) { _ in
                             cellVM.updateLoopSpeed(speed: gameSpeed)
                         }
@@ -79,19 +82,21 @@ struct ContentView: View {
                         }.allowsHitTesting(!cellVM.isPlaying)
                         // Play, Stop buttons
                         HStack {
+                            Spacer()
                             Button(action: {
                                 cellVM.togglePlay()
                             }) {
                                 Image(systemName: !cellVM.isPlaying ? "play.circle.fill" : "pause.circle.fill")
                                     .font(.title)
                             }
-                            
+                            Spacer()
                             Button(action: {
                                 cellVM.reset()
                             }) {
                                 Image(systemName: "stop.circle.fill")
                                     .font(.title)
                             }
+                            Spacer()
                         }.padding()
                     }
                 }
