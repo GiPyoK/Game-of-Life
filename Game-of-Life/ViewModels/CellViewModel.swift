@@ -12,8 +12,8 @@ import SwiftUI
 class CellViewModel: ObservableObject {
     @Published var cells = [Cell]()
     @Published var gameSpeed: Double = 1
+    @Published var isPlaying: Bool = false
     var columns = [GridItem]()
-    var isPlaying: Bool = false
     var mainTimer: Timer?
     
     private var grid: Int?
@@ -53,7 +53,7 @@ class CellViewModel: ObservableObject {
         
         var id = 0
         for _ in 0..<grid {
-            columns.append(GridItem(.adaptive(minimum: 40)))
+            columns.append(GridItem(.adaptive(minimum: 100)))
             for _ in 0..<grid {
                 cells.append(Cell(id: id))
                 id += 1
@@ -208,6 +208,7 @@ extension CellViewModel {
     }
     
     func reset() {
+        isPlaying = false
         for cell in cells {
             cells[cell.id].alive = false
             cells[cell.id].generation = 0
