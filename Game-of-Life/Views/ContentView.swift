@@ -31,7 +31,9 @@ struct ContentView: View {
                     }.padding()
                     
                     // Generations
-                    Text("Generation: ")
+                    Text("Generation: \(cellVM.generation)")
+                        .font(.system(.body, design: .monospaced))
+                        .padding()
                     
                     // Game grid
                     LazyVGrid(columns: cellVM.columns, spacing: 1) {

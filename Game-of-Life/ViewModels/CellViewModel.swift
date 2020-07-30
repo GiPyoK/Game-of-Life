@@ -13,6 +13,8 @@ class CellViewModel: ObservableObject {
     @Published var cells = [Cell]()
     @Published var gameSpeed: Double = 1
     @Published var isPlaying: Bool = false
+    @Published var generation: Int = 0
+    
     var columns = [GridItem]()
     var mainTimer: Timer?
     var grid: Int?
@@ -41,6 +43,7 @@ class CellViewModel: ObservableObject {
     
     func reset() {
         isPlaying = false
+        generation = 0
         play()
         for cell in cells {
             cells[cell.id].alive = false
@@ -215,6 +218,7 @@ extension CellViewModel {
             }
         }
         
+        generation += 1
     }
     
     private func play() {
