@@ -15,6 +15,10 @@ struct ContentView: View {
     @State var grid: Float = 10
     @State var gameSpeed: Double = 1
     
+    @State var red: Double = 0
+    @State var green: Double = 0
+    @State var blue: Double = 0
+    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -31,6 +35,15 @@ struct ContentView: View {
                         .allowsHitTesting(!cellVM.isPlaying)
                     }.padding()
                     
+                    // Random Color
+                    Button(action: {
+                        red = Double.random(in: 0...1)
+                        green = Double.random(in: 0...1)
+                        blue = Double.random(in: 0...1)
+                    }, label: {
+                        Text("Random Color")
+                    })
+                    
                     // Generations
                     Text("Generation: \(cellVM.generation)")
                         .font(.system(.body, design: .monospaced))
@@ -42,7 +55,7 @@ struct ContentView: View {
                         ForEach(cellVM.cells, id: \.id) { cell in
                             Rectangle()
                                 .frame(width: cellWidth, height: cellWidth, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                .foregroundColor(cell.alive ? Color.black : Color.gray)
+                                .foregroundColor(cell.alive ? Color(red: red, green: green, blue: blue, opacity: 1) : Color(red: 220/255, green: 220/255, blue: 220/255, opacity: 1))
                                 .gesture(TapGesture(count: 1)
                                             .onEnded { _ in
                                                 cellVM.toggleCell(cell: cell)
