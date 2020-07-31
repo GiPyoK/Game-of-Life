@@ -13,7 +13,7 @@ struct Cell: Hashable {
     var id: Int
     var alive: Bool = false
     var neighbors: Int = 0
-    var generation: Int = 0
+    var age: Int = 0
     
     
     static func == (lhs: Cell, rhs: Cell) -> Bool {

@@ -15,6 +15,8 @@
 		A6BACE0424CF3AE20036D151 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6BACE0324CF3AE20036D151 /* Preview Assets.xcassets */; };
 		A6BACE0724CF3AE20036D151 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6BACE0524CF3AE20036D151 /* LaunchScreen.storyboard */; };
 		A6BACE0F24CF3D300036D151 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BACE0E24CF3D300036D151 /* Cell.swift */; };
+		A6F0D96224D3739A00B21C04 /* WebviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F0D96124D3739A00B21C04 /* WebviewModel.swift */; };
+		A6F0D96424D374E600B21C04 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F0D96324D374E600B21C04 /* WebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		A6BACE0624CF3AE20036D151 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A6BACE0824CF3AE20036D151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6BACE0E24CF3D300036D151 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		A6F0D96124D3739A00B21C04 /* WebviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebviewModel.swift; sourceTree = "<group>"; };
+		A6F0D96324D374E600B21C04 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				A6BACDFE24CF3AE10036D151 /* ContentView.swift */,
+				A6F0D96324D374E600B21C04 /* WebView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -101,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				A6BACE0E24CF3D300036D151 /* Cell.swift */,
+				A6F0D96124D3739A00B21C04 /* WebviewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -179,8 +185,10 @@
 				A68C08F624CF757C00C4B04D /* CellViewModel.swift in Sources */,
 				A6BACDFB24CF3AE10036D151 /* AppDelegate.swift in Sources */,
 				A6BACE0F24CF3D300036D151 /* Cell.swift in Sources */,
+				A6F0D96224D3739A00B21C04 /* WebviewModel.swift in Sources */,
 				A6BACDFD24CF3AE10036D151 /* SceneDelegate.swift in Sources */,
 				A6BACDFF24CF3AE10036D151 /* ContentView.swift in Sources */,
+				A6F0D96424D374E600B21C04 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
